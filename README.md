@@ -4,13 +4,13 @@ A custom mediator implementation to limit the payload based on size in WSO2 API 
 
 > The current implementation version is only tested in the WSO2 API Manager v2.2.0
 
-### Use Case
+## Use Case
 
 This custom (sample) class mediator is implemented to restrict the Payload based on the Size limit. This mediator can be used on both the Request and Response flows to restrict the Payloads which are larger than the preferred values.
 
 Please find the detailed instructions [below](#instructions) on how to configure and use at the runtime in your environments.
 
-### Instructions
+## Instructions
 
 - Clone or download the Repo/Project and execute the following command from the root directory to build the project
 
@@ -115,7 +115,7 @@ Please find the detailed instructions [below](#instructions) on how to configure
     </class>
     ```
 
-### Contributions
+## Contributions
 
 Pull Requests, Issues, Improvments, and etc. are welcomed
 
