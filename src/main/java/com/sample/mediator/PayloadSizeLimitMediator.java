@@ -24,10 +24,12 @@ public class PayloadSizeLimitMediator extends AbstractMediator {
 
     // default size limit is set to 10 MB
     private String sizeLimit = "10";
+    private String apiName = "not available";
+    private String flowDirection = "not available";
     private int statusCode = 202;
 
     private static final String PAYLOAD_SIZE_LIMIT_PROPERTY = "payload-size-too-large";
-    
+
     private static DecimalFormat decimalFormat = new DecimalFormat("0.00");
     private static final Log logger = LogFactory.getLog(PayloadSizeLimitMediator.class);
 
@@ -36,6 +38,7 @@ public class PayloadSizeLimitMediator extends AbstractMediator {
 
         if (logger.isDebugEnabled()) {
             logger.debug("Mediate method execution started");
+            logger.debug("API Name : " + apiName + " Direction Flow : " + flowDirection);
         }
 
         org.apache.axis2.context.MessageContext messageContext = ((Axis2MessageContext) synapseMessageContext)
@@ -122,7 +125,7 @@ public class PayloadSizeLimitMediator extends AbstractMediator {
                             }
 
                             logger.warn("Cannot proceed further... The payload size is " + contentLength
-                                    + " MB which is larger than " + sizeLimit + " MB");
+                                    + " MB which is larger than " + sizeLimit + " MB for the API : " + apiName + " , Direction Flow : " + flowDirection);
                             synapseMessageContext.setProperty(PAYLOAD_SIZE_LIMIT_PROPERTY, true);
                             return true;
                         }
@@ -163,7 +166,7 @@ public class PayloadSizeLimitMediator extends AbstractMediator {
                             }
 
                             logger.warn("Cannot proceed further... The payload size is " + streamSizeInMb
-                                    + " MB which is larger than " + sizeLimit + " MB.");
+                                    + " MB which is larger than " + sizeLimit + " MB for the API : " + apiName + " , Direction Flow : " + flowDirection);
                             synapseMessageContext.setProperty(PAYLOAD_SIZE_LIMIT_PROPERTY, true);
                             return true;
                         }
@@ -192,6 +195,22 @@ public class PayloadSizeLimitMediator extends AbstractMediator {
     // get the sizeLimit property
     public String getSizeLimit() {
         return sizeLimit;
+    }
+
+    public String getApiName() {
+        return apiName;
+    }
+
+    public void setApiName(String apiName) {
+        this.apiName = apiName;
+    }
+
+    public String getFlowDirection() {
+        return flowDirection;
+    }
+
+    public void setFlowDirection(String flowDirection) {
+        this.flowDirection = flowDirection;
     }
 
     @Override
